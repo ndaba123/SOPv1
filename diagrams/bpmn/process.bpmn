@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  id="Definitions_ScalableCakeSOP"
+                  targetNamespace="http://example.com/bpmn/scalable-cake-sop">
+  <bpmn:process id="Process_ScalableCakeBaking" name="Scalable Cake Baking SOP" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_ProcessStart" name="Start"/>
+
+    <bpmn:task id="Task_DeterminePeople" name="Determine number of people to serve"/>
+    <bpmn:task id="Task_CalculateBatter" name="Calculate total batter (people × 130 g)"/>
+    <bpmn:exclusiveGateway id="Gateway_HasScale" name="Scale available?"/>
+    <bpmn:task id="Task_SelectStandardPan" name="Use one 9-inch round or 9×13-inch pan (~1,300 g batter)"/>
+    <bpmn:task id="Task_UseCalculatedBatter" name="Use calculated batter amount"/>
+    <bpmn:exclusiveGateway id="Gateway_MergeScaleDecision" name="Continue"/>
+
+    <bpmn:task id="Task_MeasureIngredients" name="Measure ingredients (equal sugar/fat/liquid; flour is double)"/>
+    <bpmn:exclusiveGateway id="Gateway_DietaryRestrictions" name="Dietary restrictions apply?"/>
+    <bpmn:task id="Task_SubstituteIngredients" name="Substitute ingredients before mixing"/>
+    <bpmn:exclusiveGateway id="Gateway_MergeDietDecision" name="Continue"/>
+
+    <bpmn:task id="Task_PreheatAndGrease" name="Preheat oven to 350°F (175°C) and grease pan"/>
+    <bpmn:task id="Task_CreamFatSugar" name="Mix fat and sugar until creamy"/>
+    <bpmn:task id="Task_AddEggs" name="Add eggs one at a time"/>
+    <bpmn:task id="Task_MixDry" name="Mix dry ingredients separately"/>
+    <bpmn:task id="Task_AlternateDryLiquid" name="Alternate adding dry ingredients and liquid"/>
+    <bpmn:task id="Task_MixUntilSmooth" name="Stop mixing once batter is smooth"/>
+    <bpmn:exclusiveGateway id="Gateway_BatterDry" name="Batter looks dry?"/>
+    <bpmn:task id="Task_AddLiquid" name="Add liquid 1 tablespoon at a time"/>
+
+    <bpmn:task id="Task_FillPans" name="Fill pans no more than two-thirds full"/>
+    <bpmn:task id="Task_BakeInitial" name="Bake at 350°F (175°C): 25–30 min (thin) or 40–55 min (thick)"/>
+    <bpmn:exclusiveGateway id="Gateway_CakeDone" name="Cake springs back and toothpick comes out clean?"/>
+    <bpmn:task id="Task_BakeMore" name="Continue baking in 5-minute intervals"/>
+
+    <bpmn:task id="Task_CoolInPan" name="Cool in pan for 10–15 minutes"/>
+    <bpmn:task id="Task_CoolCompletely" name="Remove from pan and cool completely"/>
+    <bpmn:task id="Task_Serve" name="Serve plain or frost"/>
+    <bpmn:endEvent id="EndEvent_ProcessEnd" name="End"/>
+
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_ProcessStart" targetRef="Task_DeterminePeople"/>
+    <bpmn:sequenceFlow id="Flow_02" sourceRef="Task_DeterminePeople" targetRef="Task_CalculateBatter"/>
+    <bpmn:sequenceFlow id="Flow_03" sourceRef="Task_CalculateBatter" targetRef="Gateway_HasScale"/>
+    <bpmn:sequenceFlow id="Flow_04" sourceRef="Gateway_HasScale" targetRef="Task_UseCalculatedBatter" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_05" sourceRef="Gateway_HasScale" targetRef="Task_SelectStandardPan" name="No"/>
+    <bpmn:sequenceFlow id="Flow_06" sourceRef="Task_UseCalculatedBatter" targetRef="Gateway_MergeScaleDecision"/>
+    <bpmn:sequenceFlow id="Flow_07" sourceRef="Task_SelectStandardPan" targetRef="Gateway_MergeScaleDecision"/>
+
+    <bpmn:sequenceFlow id="Flow_08" sourceRef="Gateway_MergeScaleDecision" targetRef="Task_MeasureIngredients"/>
+    <bpmn:sequenceFlow id="Flow_09" sourceRef="Task_MeasureIngredients" targetRef="Gateway_DietaryRestrictions"/>
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Gateway_DietaryRestrictions" targetRef="Task_SubstituteIngredients" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Gateway_DietaryRestrictions" targetRef="Gateway_MergeDietDecision" name="No"/>
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_SubstituteIngredients" targetRef="Gateway_MergeDietDecision"/>
+
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Gateway_MergeDietDecision" targetRef="Task_PreheatAndGrease"/>
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_PreheatAndGrease" targetRef="Task_CreamFatSugar"/>
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_CreamFatSugar" targetRef="Task_AddEggs"/>
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_AddEggs" targetRef="Task_MixDry"/>
+    <bpmn:sequenceFlow id="Flow_17" sourceRef="Task_MixDry" targetRef="Task_AlternateDryLiquid"/>
+    <bpmn:sequenceFlow id="Flow_18" sourceRef="Task_AlternateDryLiquid" targetRef="Task_MixUntilSmooth"/>
+    <bpmn:sequenceFlow id="Flow_19" sourceRef="Task_MixUntilSmooth" targetRef="Gateway_BatterDry"/>
+    <bpmn:sequenceFlow id="Flow_20" sourceRef="Gateway_BatterDry" targetRef="Task_AddLiquid" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_21" sourceRef="Task_AddLiquid" targetRef="Gateway_BatterDry"/>
+    <bpmn:sequenceFlow id="Flow_22" sourceRef="Gateway_BatterDry" targetRef="Task_FillPans" name="No"/>
+
+    <bpmn:sequenceFlow id="Flow_23" sourceRef="Task_FillPans" targetRef="Task_BakeInitial"/>
+    <bpmn:sequenceFlow id="Flow_24" sourceRef="Task_BakeInitial" targetRef="Gateway_CakeDone"/>
+    <bpmn:sequenceFlow id="Flow_25" sourceRef="Gateway_CakeDone" targetRef="Task_BakeMore" name="No"/>
+    <bpmn:sequenceFlow id="Flow_26" sourceRef="Task_BakeMore" targetRef="Gateway_CakeDone"/>
+    <bpmn:sequenceFlow id="Flow_27" sourceRef="Gateway_CakeDone" targetRef="Task_CoolInPan" name="Yes"/>
+
+    <bpmn:sequenceFlow id="Flow_28" sourceRef="Task_CoolInPan" targetRef="Task_CoolCompletely"/>
+    <bpmn:sequenceFlow id="Flow_29" sourceRef="Task_CoolCompletely" targetRef="Task_Serve"/>
+    <bpmn:sequenceFlow id="Flow_30" sourceRef="Task_Serve" targetRef="EndEvent_ProcessEnd"/>
+  </bpmn:process>
+</bpmn:definitions>
