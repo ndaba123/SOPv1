@@ -1,0 +1,72 @@
+Standard Operating Procedure (SOP)
+Scalable Cake Baking for Any Number of People
+Transcript:
+You can bake a cake for any number of people by following three actions. First, determine how many people you will serve. Next, measure ingredients using a simple scaling rule. Finally, mix and bake the cake at one consistent temperature.
+Step 1: Determine Required Cake Size
+Multiply the number of people by 130 grams to calculate total batter required.
+Decision Point:
+If you do not have a scale, use one standard 9-inch round or 9×13-inch pan for approximately 1,300 grams of batter.
+Step 2: Measure Ingredients
+Use equal amounts of sugar, fat, and liquid. Use twice that amount of flour.
+Use sugar, butter or oil, milk, flour, eggs, baking powder, salt, and optional vanilla.
+Decision Point:
+If dietary restrictions apply, substitute ingredients before mixing.
+Step 3: Mix the Batter
+Preheat the oven to 350°F (175°C). Grease the pan. Mix fat and sugar until creamy. Add eggs one at a time. Mix dry ingredients separately. Alternate adding dry ingredients and liquid. Stop mixing once the batter becomes smooth.
+Decision Point:
+If the batter looks dry, add liquid one tablespoon at a time.
+Step 4: Bake the Cake
+Fill pans no more than two-thirds full. Bake at 350°F (175°C).
+Decision Point:
+If the cake springs back and a toothpick comes out clean, remove it from the oven. If not, continue baking in 5-minute intervals.
+Bake for 25–30 minutes for thin layers or 40–55 minutes for thick cakes.
+Step 5: Cool and Serve
+Cool the cake in the pan for 10–15 minutes. Remove from the pan and cool completely. Serve plain or frost.
+1. Purpose Statement
+This document defines a repeatable and scalable procedure for baking a cake that serves any number of people.
+2. Scope
+Who: Home bakers, students, instructors, and experienced cooks.
+What: Baking a scalable cake using proportional ingredient ratios.
+When: Any situation requiring a flexible cake recipe.
+3. Roles and Responsibilities
+Baker / Operator: Determines quantities, mixes ingredients, bakes, and evaluates doneness.
+Instructor / Reviewer: Verifies correct application of the procedure.
+4. Inputs and Outputs
+Inputs: Number of people, ingredients, baking equipment, oven.
+Outputs: Finished cake sized appropriately for the group.
+6. Exceptions and Known Rework Scenarios
+Overmixed batter produces dense cake. Undercooked cake requires additional baking. Overfilled pans cause overflow and require batter removal.
+7. Prompt Log and Generation Traceability
+The following prompt log documents how this SOP was generated using AI assistance.
+User Prompt: “Can you produce an efficient walkthrough on how to bake a cake for any quantity of people?” (2/3/26)
+AI Output: Provided a scalable cake-baking method using ratios and proportional scaling.
+User Prompt: “Can you make this even more efficient?” (2/3/26)
+AI Output: Condensed the method into a minimal algorithm with simplified calculations.
+User Prompt: “Can you re-produce this in a way that all levels of cooking experience can follow?” (2/23/26)
+AI Output: Rewrote the process in beginner-friendly language while preserving scalability.
+User Prompt: “Produce a structured document with the information in this chat log and the attached document.” (2/3/26)
+AI Output: Generated a formal SOP including purpose, scope, roles, procedure, and exceptions.
+Can you tighten the language within this document as much as possible without removing key information? (2/5/26)
+AI Output: Generated an SOP with improved language, clarity, and proofread for any errors. (AI-as-an-editor)
+2. Can you give me a copy of this document and update the prompt log within the document with the prompts that were used today? Add the date of the prompts used today as well (2/5/26)
+AI Output: Generated an SOP with updated prompt log with today’s date included. (AI-as-an-editor)
+3. Can you give me this document in Word document format while also keeping the prompts that were included in the original prompt log? (2/5/26)
+AI Output: Generated SOP in Word document format while including original document contents. (AI-as-an-editor)
+Edits Applied: Normalized terminology, resolved temperature inconsistencies, and formatted content into SOP structure.
+
+Glossary / Data Dictionary
+Batter: Unbaked mixture of cake ingredients.
+Fat: Butter or oil that provides moisture and structure.
+Scaling Rule: Formula that adjusts ingredient quantities based on servings.
+Doneness: Condition where the cake finishes baking and is ready to remove.
+Decision Point: Step requiring evaluation before proceeding.
+Change Log / Summary of Revisions
+The following changes were made to improve clarity, usability, and consistency while maintaining the original structure, formatting, and intent of the SOP.
+1. Simplified step-by-step baking instructions into short, action-oriented statements written in active voice.
+2. Added clearly labeled Decision Points to indicate where the baker must evaluate conditions before proceeding.
+3. Standardized baking temperature to 350°F (175°C) for consistency across all steps.
+4. Removed ambiguous or repetitive phrasing and corrected grammatical issues.
+5. Clarified ingredient scaling rules to reduce calculation errors.
+6. Added a Glossary / Data Dictionary to define key terms used throughout the SOP.
+7. Improved consistency in terminology across transcript, procedure, and exception sections.
+8. Maintained original section headers, order, and professional SOP formatting.
