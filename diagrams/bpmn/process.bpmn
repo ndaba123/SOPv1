@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  id="Definitions_CakeSOP"
+  targetNamespace="http://example.com/bpmn/cake-sop">
+
+  <bpmn:process id="Process_ScalableCakeBaking" name="Scalable Cake Baking for Any Number of People" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_Begin" name="Start"/>
+
+    <bpmn:task id="Task_DetermineSize" name="Determine required cake size (people × 130g batter)"/>
+    <bpmn:exclusiveGateway id="Gateway_HasScale" name="Scale available?"/>
+    <bpmn:task id="Task_UseStandardPan" name="Use standard pan capacity (~1300g batter in 9-inch round or 9×13-inch)"/>
+    <bpmn:exclusiveGateway id="Gateway_MergeScale" name="Size determined"/>
+
+    <bpmn:task id="Task_MeasureIngredients" name="Measure ingredients (equal sugar/fat/liquid, double flour; add eggs, baking powder, salt, optional vanilla)"/>
+    <bpmn:exclusiveGateway id="Gateway_DietaryRestrictions" name="Dietary restrictions apply?"/>
+    <bpmn:task id="Task_SubstituteIngredients" name="Substitute ingredients before mixing"/>
+    <bpmn:exclusiveGateway id="Gateway_MergeDiet" name="Ingredients finalized"/>
+
+    <bpmn:task id="Task_MixBatter" name="Mix batter (preheat 350°F/175°C, grease pan, cream fat+sugar, add eggs, alternate dry+liquid, mix until smooth)"/>
+    <bpmn:exclusiveGateway id="Gateway_BatterDry" name="Batter looks dry?"/>
+    <bpmn:task id="Task_AddLiquid" name="Add liquid 1 tbsp at a time"/>
+
+    <bpmn:task id="Task_BakeCake" name="Bake cake at 350°F/175°C (fill pans ≤ 2/3 full; 25–30 min thin or 40–55 min thick)"/>
+    <bpmn:exclusiveGateway id="Gateway_CakeDone" name="Cake springs back and toothpick clean?"/>
+    <bpmn:task id="Task_ContinueBaking" name="Continue baking in 5-minute intervals"/>
+
+    <bpmn:task id="Task_CoolServe" name="Cool 10–15 min in pan, remove, cool completely, serve/frost"/>
+    <bpmn:endEvent id="EndEvent_Finish" name="End"/>
+
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_Begin" targetRef="Task_DetermineSize"/>
+    <bpmn:sequenceFlow id="Flow_02" sourceRef="Task_DetermineSize" targetRef="Gateway_HasScale"/>
+    <bpmn:sequenceFlow id="Flow_03_yes" sourceRef="Gateway_HasScale" targetRef="Gateway_MergeScale" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_04_no" sourceRef="Gateway_HasScale" targetRef="Task_UseStandardPan" name="No"/>
+    <bpmn:sequenceFlow id="Flow_05" sourceRef="Task_UseStandardPan" targetRef="Gateway_MergeScale"/>
+
+    <bpmn:sequenceFlow id="Flow_06" sourceRef="Gateway_MergeScale" targetRef="Task_MeasureIngredients"/>
+    <bpmn:sequenceFlow id="Flow_07" sourceRef="Task_MeasureIngredients" targetRef="Gateway_DietaryRestrictions"/>
+    <bpmn:sequenceFlow id="Flow_08_yes" sourceRef="Gateway_DietaryRestrictions" targetRef="Task_SubstituteIngredients" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_09_no" sourceRef="Gateway_DietaryRestrictions" targetRef="Gateway_MergeDiet" name="No"/>
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_SubstituteIngredients" targetRef="Gateway_MergeDiet"/>
+
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Gateway_MergeDiet" targetRef="Task_MixBatter"/>
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_MixBatter" targetRef="Gateway_BatterDry"/>
+    <bpmn:sequenceFlow id="Flow_13_yes" sourceRef="Gateway_BatterDry" targetRef="Task_AddLiquid" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_14_no" sourceRef="Gateway_BatterDry" targetRef="Task_BakeCake" name="No"/>
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_AddLiquid" targetRef="Gateway_BatterDry"/>
+
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_BakeCake" targetRef="Gateway_CakeDone"/>
+    <bpmn:sequenceFlow id="Flow_17_yes" sourceRef="Gateway_CakeDone" targetRef="Task_CoolServe" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_18_no" sourceRef="Gateway_CakeDone" targetRef="Task_ContinueBaking" name="No"/>
+    <bpmn:sequenceFlow id="Flow_19" sourceRef="Task_ContinueBaking" targetRef="Gateway_CakeDone"/>
+
+    <bpmn:sequenceFlow id="Flow_20" sourceRef="Task_CoolServe" targetRef="EndEvent_Finish"/>
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CakeSOP">
+    <bpmndi:BPMNPlane id="BPMNPlane_CakeSOP" bpmnElement="Process_ScalableCakeBaking">
+      <bpmndi:BPMNShape id="Shape_StartEvent_Begin" bpmnElement="StartEvent_Begin">
+        <dc:Bounds x="100" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_DetermineSize" bpmnElement="Task_DetermineSize">
+        <dc:Bounds x="180" y="178" width="210" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_HasScale" bpmnElement="Gateway_HasScale" isMarkerVisible="true">
+        <dc:Bounds x="440" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_UseStandardPan" bpmnElement="Task_UseStandardPan">
+        <dc:Bounds x="540" y="300" width="260" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_MergeScale" bpmnElement="Gateway_MergeScale" isMarkerVisible="true">
+        <dc:Bounds x="860" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_MeasureIngredients" bpmnElement="Task_MeasureIngredients">
+        <dc:Bounds x="960" y="178" width="320" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_DietaryRestrictions" bpmnElement="Gateway_DietaryRestrictions" isMarkerVisible="true">
+        <dc:Bounds x="1330" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_SubstituteIngredients" bpmnElement="Task_SubstituteIngredients">
+        <dc:Bounds x="1430" y="300" width="220" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_MergeDiet" bpmnElement="Gateway_MergeDiet" isMarkerVisible="true">
+        <dc:Bounds x="1710" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_MixBatter" bpmnElement="Task_MixBatter">
+        <dc:Bounds x="1810" y="178" width="340" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_BatterDry" bpmnElement="Gateway_BatterDry" isMarkerVisible="true">
+        <dc:Bounds x="2200" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_AddLiquid" bpmnElement="Task_AddLiquid">
+        <dc:Bounds x="2310" y="300" width="200" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_BakeCake" bpmnElement="Task_BakeCake">
+        <dc:Bounds x="2310" y="178" width="320" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Gateway_CakeDone" bpmnElement="Gateway_CakeDone" isMarkerVisible="true">
+        <dc:Bounds x="2680" y="193" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_ContinueBaking" bpmnElement="Task_ContinueBaking">
+        <dc:Bounds x="2790" y="300" width="220" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Task_CoolServe" bpmnElement="Task_CoolServe">
+        <dc:Bounds x="2790" y="178" width="300" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_EndEvent_Finish" bpmnElement="EndEvent_Finish">
+        <dc:Bounds x="3140" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Edge_Flow_01" bpmnElement="Flow_01"><di:waypoint x="136" y="218"/><di:waypoint x="180" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_02" bpmnElement="Flow_02"><di:waypoint x="390" y="218"/><di:waypoint x="440" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_03_yes" bpmnElement="Flow_03_yes"><di:waypoint x="490" y="218"/><di:waypoint x="860" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_04_no" bpmnElement="Flow_04_no"><di:waypoint x="465" y="243"/><di:waypoint x="465" y="340"/><di:waypoint x="540" y="340"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_05" bpmnElement="Flow_05"><di:waypoint x="800" y="340"/><di:waypoint x="885" y="340"/><di:waypoint x="885" y="243"/></bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_Flow_06" bpmnElement="Flow_06"><di:waypoint x="910" y="218"/><di:waypoint x="960" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_07" bpmnElement="Flow_07"><di:waypoint x="1280" y="218"/><di:waypoint x="1330" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_08_yes" bpmnElement="Flow_08_yes"><di:waypoint x="1355" y="243"/><di:waypoint x="1355" y="340"/><di:waypoint x="1430" y="340"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_09_no" bpmnElement="Flow_09_no"><di:waypoint x="1380" y="218"/><di:waypoint x="1710" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_10" bpmnElement="Flow_10"><di:waypoint x="1650" y="340"/><di:waypoint x="1735" y="340"/><di:waypoint x="1735" y="243"/></bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_Flow_11" bpmnElement="Flow_11"><di:waypoint x="1760" y="218"/><di:waypoint x="1810" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_12" bpmnElement="Flow_12"><di:waypoint x="2150" y="218"/><di:waypoint x="2200" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_13_yes" bpmnElement="Flow_13_yes"><di:waypoint x="2225" y="243"/><di:waypoint x="2225" y="340"/><di:waypoint x="2310" y="340"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_14_no" bpmnElement="Flow_14_no"><di:waypoint x="2250" y="218"/><di:waypoint x="2310" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_15" bpmnElement="Flow_15"><di:waypoint x="2510" y="340"/><di:waypoint x="2550" y="340"/><di:waypoint x="2550" y="270"/><di:waypoint x="2225" y="270"/><di:waypoint x="2225" y="243"/></bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_Flow_16" bpmnElement="Flow_16"><di:waypoint x="2630" y="218"/><di:waypoint x="2680" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_17_yes" bpmnElement="Flow_17_yes"><di:waypoint x="2730" y="218"/><di:waypoint x="2790" y="218"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_18_no" bpmnElement="Flow_18_no"><di:waypoint x="2705" y="243"/><di:waypoint x="2705" y="340"/><di:waypoint x="2790" y="340"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_19" bpmnElement="Flow_19"><di:waypoint x="3010" y="340"/><di:waypoint x="3050" y="340"/><di:waypoint x="3050" y="270"/><di:waypoint x="2705" y="270"/><di:waypoint x="2705" y="243"/></bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_Flow_20" bpmnElement="Flow_20"><di:waypoint x="3090" y="218"/><di:waypoint x="3140" y="218"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
