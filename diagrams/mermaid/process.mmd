@@ -1,0 +1,28 @@
+flowchart TD
+    A([Start]) --> B[Step 1: Determine Required Cake Size\nMultiply number of people by 130 grams to calculate total batter required.]
+    B --> C{Do you have a scale?}
+    C -- Yes --> D[Proceed with calculated batter amount.]
+    C -- No --> E[Use one standard 9-inch round or 9×13-inch pan for approximately 1,300 grams of batter.]
+
+    D --> F[Step 2: Measure Ingredients\nUse equal amounts of sugar, fat, and liquid.\nUse twice that amount of flour.\nUse sugar, butter or oil, milk, flour, eggs, baking powder, salt, and optional vanilla.]
+    E --> F
+    F --> G{Do dietary restrictions apply?}
+    G -- Yes --> H[Substitute ingredients before mixing.]
+    G -- No --> I[Continue with selected ingredients.]
+
+    H --> J[Step 3: Mix the Batter\nPreheat oven to 350°F (175°C).\nGrease the pan.\nMix fat and sugar until creamy.\nAdd eggs one at a time.\nMix dry ingredients separately.\nAlternate adding dry ingredients and liquid.\nStop mixing once batter becomes smooth.]
+    I --> J
+    J --> K{Does the batter look dry?}
+    K -- Yes --> L[Add liquid one tablespoon at a time.]
+    K -- No --> M[Proceed to baking.]
+    L --> N[Step 4: Bake the Cake\nFill pans no more than two-thirds full.\nBake at 350°F (175°C).]
+    M --> N
+
+    N --> O{Does cake spring back and toothpick come out clean?}
+    O -- Yes --> P[Remove cake from oven.]
+    O -- No --> Q[Continue baking in 5-minute intervals.]
+    Q --> O
+    P --> R[Guideline: Bake 25–30 minutes for thin layers or 40–55 minutes for thick cakes.]
+
+    R --> S[Step 5: Cool and Serve\nCool cake in pan for 10–15 minutes.\nRemove from pan and cool completely.\nServe plain or frost.]
+    S --> T([End])
